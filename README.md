@@ -1,2 +1,2 @@
-# ai_diet
+# Diyetko
 
