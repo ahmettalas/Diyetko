@@ -1,7 +1,15 @@
 import 'package:ai_diet/LoginScreen.dart';
+import 'package:ai_diet/RegisterScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Uygulamanın yalnızca dikey modda çalışmasını sağlar
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
   runApp(const MyApp());
 }
 

@@ -1,25 +1,25 @@
-import 'package:ai_diet/RegisterScreen.dart';
 import 'package:ai_diet/main.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key, required this.title});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key, required this.title});
 
   final String title;
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
+  final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _isPasswordVisible = true;
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil screenUtil = ScreenUtil(context);
+    final screenUtil = ScreenUtil(context);
 
     return Scaffold(
       backgroundColor: Color(0xFFC1FF72),
@@ -34,7 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Logo Section
+              // Logo Bölümü
               Center(
                 child: Padding(
                   padding: EdgeInsets.only(
@@ -47,6 +47,27 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
 
+              // Ad Soyad TextFormField
+              TextFormField(
+                controller: _nameController,
+                decoration: InputDecoration(
+                  labelText: 'Ad Soyad',
+                  labelStyle: TextStyle(color: Colors.black),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  prefixIcon: const Icon(Icons.person, color: Colors.black),
+                ),
+                keyboardType: TextInputType.name,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Lütfen adınızı ve soyadınızı girin';
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(height: screenUtil.yukseklikOranla(0.02)),
+
               // Email TextFormField
               TextFormField(
                 controller: _emailController,
@@ -54,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   labelText: 'Email',
                   labelStyle: TextStyle(color: Colors.black),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20.0),
+                    borderRadius: BorderRadius.circular(20),
                   ),
                   prefixIcon: const Icon(Icons.email, color: Colors.black),
                 ),
@@ -69,9 +90,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   return null;
                 },
               ),
-              SizedBox(height: screenUtil.yukseklikOranla(1 / 50)),
+              SizedBox(height: screenUtil.yukseklikOranla(0.02)),
 
-              // Password TextFormField
+              // Şifre TextFormField
               TextFormField(
                 controller: _passwordController,
                 obscureText: _isPasswordVisible,
@@ -79,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   labelText: 'Şifre',
                   labelStyle: TextStyle(color: Colors.black),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20.0),
+                    borderRadius: BorderRadius.circular(20),
                   ),
                   prefixIcon: const Icon(Icons.lock, color: Colors.black),
                   suffixIcon: GestureDetector(
@@ -112,68 +133,41 @@ class _LoginScreenState extends State<LoginScreen> {
                   return null;
                 },
               ),
-              SizedBox(height: screenUtil.yukseklikOranla(1 / 10)),
+              SizedBox(height: screenUtil.yukseklikOranla(0.07)),
 
-              // Login Button
+              // Kayıt Ol Butonu
               Center(
                 child: SizedBox(
-                  width: screenUtil.genislikOranla(6 / 10),
-                  height: screenUtil.yukseklikOranla(6 / 100),
+                  width: screenUtil.genislikOranla(0.54),
+                  height: screenUtil.yukseklikOranla(0.07),
                   child: ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        print('E-posta Doğru: ${_emailController.text}');
+                        print('Ad Soyad: ${_nameController.text}');
+                        print('E-posta: ${_emailController.text}');
+                        print('Şifre: ${_passwordController.text}');
                       }
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.black,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25.0),
-                      ),
-                    ),
-                    child: const Text(
-                      'Giriş Yap',
-                      style: TextStyle(
-                        fontSize: 17.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: screenUtil.yukseklikOranla(1 / 55)),
-              Center(
-                child: SizedBox(
-                  width: screenUtil.genislikOranla(8 / 10),
-                  height: screenUtil.yukseklikOranla(6 / 100),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              RegisterScreen(title: 'Kayıt Ol'),
-                        ),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.black,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25.0),
+                        borderRadius: BorderRadius.circular(25),
                       ),
                     ),
                     child: const Text(
                       'Kayıt Ol',
                       style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 17.0,
+                        fontSize: 18.0,
                         fontWeight: FontWeight.bold,
+                        color: Colors.white,
                       ),
                     ),
                   ),
                 ),
               ),
+              SizedBox(height: screenUtil.yukseklikOranla(0.02)),
+
+              // Giriş Yap Butonu
             ],
           ),
         ),

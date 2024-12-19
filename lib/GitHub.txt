@@ -1,0 +1,16 @@
+
+———— GitHub  —————
+
+1 )Proje klasöründe çalıştığın süre  boyunca   
+-     değişiklikleri kaydetmek için : 
+     git add .
+
+2 ) Değişiklikleri commit yapmak için :
+-     git commit -m “Mesaj”
+
+3 ) Değişiklikleri github’a göndermek için:
+-     git push origin main
+
+-----------------------------------------------------
+1 ) Güncellemeleri çekmek için : 
+-     git pull origin main
