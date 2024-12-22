@@ -1,50 +1,27 @@
-import 'package:ai_diet/LoginScreen.dart';
-import 'package:ai_diet/RegisterScreen.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter/material.dart'; // Flutter'ın temel widget'larını içe aktarır.
+import 'login_screen.dart'; // LoginScreen dosyasını içe aktarır (Başlangıç ekranı için).
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  // Uygulamanın yalnızca dikey modda çalışmasını sağlar
-  await SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-  ]);
-  runApp(const MyApp());
+void main() {
+  runApp(
+      const MyApp()); // Uygulamanın başlangıç noktasıdır. MyApp widget'ını başlatır.
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({super.key}); // Stateless widget tanımı.
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Diyetko',
+      debugShowCheckedModeBanner:
+          false, // Sağ üstteki "debug" yazısını kaldırır.
+      title: 'Diyetko', // Uygulama başlığı.
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
-        useMaterial3: true,
+        colorScheme:
+            ColorScheme.fromSeed(seedColor: Colors.green), // Tema rengi.
+        useMaterial3: true, // Material 3 tasarım bileşenlerini etkinleştirir.
       ),
-      home: LoginScreen(title: 'Diyetko'),
+      home: const LoginScreen(
+          title: 'Diyetko'), // LoginScreen başlangıç ekranı olarak ayarlanır.
     );
-  }
-}
-
-class ScreenUtil {
-  final BuildContext context;
-  late double ekranGenisligi;
-  late double ekranYuksekligi;
-
-  ScreenUtil(this.context) {
-    ekranGenisligi = MediaQuery.of(context).size.width;
-    ekranYuksekligi = MediaQuery.of(context).size.height;
-  }
-
-  double genislikOranla(double oran) {
-    return ekranGenisligi * oran;
-  }
-
-  double yukseklikOranla(double oran) {
-    return ekranYuksekligi * oran;
   }
 }
